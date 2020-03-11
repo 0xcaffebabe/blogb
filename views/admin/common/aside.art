@@ -1,7 +1,7 @@
 <div class="aside fl">
             <ul class="menu list-unstyled">
                 <li>
-                    <a class="item active" href="user.html">
+                    <a class="item active" href="user">
 						<span class="glyphicon glyphicon-user"></span>
 						用户管理
 					</a>

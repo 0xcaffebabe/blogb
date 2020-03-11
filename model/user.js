@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypy = require('bcrypt');
+const joi = require('joi');
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -51,6 +52,18 @@ async function createAdmin() {
     }
 }
 createAdmin();
+
+const validateUser = (user)=>{
+    const schema = {
+        username: joi.string().min(2).max(16).required().error(new Error('用户名不符合要求')),
+        email: joi.string().email().error(new Error('邮箱不符合要求')),
+        password: joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required().error(new Error('密码不符合要求')),
+        role: joi.string().valid('normal', 'admin').required().error(new Error('角色属性不合法')),
+        state: joi.number().valid(0, 1).required().error(new Error('状态属性不合法'))
+    };
+    return joi.validate(user, schema);
+}
+
 module.exports = {
-    user
+    user,validateUser
 }

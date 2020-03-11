@@ -25,9 +25,19 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // session
 app.use(session({secret:'keyyyy'}))
 
+// 拦截未登录请求
+app.use('/admin',require('./middleware/loginGuard'))
+
 // 路由
 app.use('/home', home);
 app.use('/admin', admin);
+
+// 错误处理
+app.use((err,req,res,next)=>{
+    const result =  JSON.parse(err);
+
+    res.redirect(`${result.path}?message=${result.message}`)
+});
 
 app.listen(80);
 console.log('服务器启动成功，http://localhost')
