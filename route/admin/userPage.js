@@ -5,7 +5,7 @@ module.exports = async (req, res) => {
     let pageSize = 2;
     let count = await user.countDocuments({});
     let totalPage = Math.ceil(count / pageSize);
-
+    req.app.locals.current = 'user';
     const list = await user.find({}).limit(pageSize).skip((page - 1) * pageSize);
     res.render('admin/user', {
         user: req.session.user,
