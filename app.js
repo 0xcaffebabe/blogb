@@ -6,10 +6,13 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const dateformat = require('dateformat');
 const template = require('art-template');
+const config = require('config');
 const morgan = require('morgan');
 require('./model/connect')
 require('./model/user')
 const app = express();
+
+console.log('现在使用的环境',config.get('enviroment'))
 
 // 模板相关配置
 // 位置

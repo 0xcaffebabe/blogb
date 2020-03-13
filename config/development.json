@@ -1,0 +1,7 @@
+{
+    "enviroment":"dev",
+    "db":{
+        "username":"root",
+        "password":"root"
+    }
+}
